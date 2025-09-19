@@ -29,18 +29,16 @@ public class Util {
 
     public static void limpar(JComponent... componentes) {
         for (int i = 0; i < componentes.length; i++) {
-            JComponent comp = componentes[i];
-            //intanceof
-            if (comp instanceof JTextField textField) {
-                textField.setText("");
-            } else if (comp instanceof JCheckBox checkBox) {
-                checkBox.setSelected(false);
-            } else if (comp instanceof JComboBox comboBox) {
-                comboBox.setSelectedIndex(-1);
-            } else if (comp instanceof JFormattedTextField formattedTextField) {
-                formattedTextField.setText("");
-            } else if (comp instanceof JPasswordField passwordField) {
-                passwordField.setText("");
+            if (componentes[i] instanceof JTextField) {
+                ((JTextField) componentes[i]).setText("");
+            } else if (componentes[i] instanceof JCheckBox) {
+                ((JCheckBox) componentes[i]).setSelected(false);
+            } else if (componentes[i] instanceof JComboBox) {
+                ((JComboBox<?>) componentes[i]).setSelectedIndex(-1); // limpa seleção
+            } else if (componentes[i] instanceof JFormattedTextField) {
+                ((JFormattedTextField) componentes[i]).setText("");
+            } else if (componentes[i] instanceof JPasswordField) {
+                ((JPasswordField) componentes[i]).setText("");
             }
         }
 
@@ -64,7 +62,7 @@ public class Util {
     }
 
     public static int strToInt(String num) {
-        return Integer.valueOf(num);
+        return Integer.parseInt(num);
     }
 
     public static String atrToInt(String num) {
@@ -99,17 +97,16 @@ public class Util {
         return sdf.format(data);
     }
 
-    // Perguntar para o titio Marcos se posso fazer um metodo para verificar sé é um numero ou um texto
-    
-//    public static boolean validarNumero(javax.swing.JTextField campo, String msg) {
-//    try {
-//        Integer.parseInt(campo.getText());
-//        return true;
-//    } catch (NumberFormatException e) {
-//        JOptionPane.showMessageDialog(null, msg, "Erro de Entrada", JOptionPane.ERROR_MESSAGE);
-//        campo.setText("");
-//        campo.requestFocus();
-//        return false;
-//    }
-//}
+
+    public static boolean validarNumero(javax.swing.JTextField campo, String msg) {
+        try {
+            Integer.parseInt(campo.getText());
+            return true;
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, msg, "Erro de Entrada", JOptionPane.ERROR_MESSAGE);
+            campo.setText("");
+            campo.requestFocus();
+            return false;
+        }
+    }
 }
