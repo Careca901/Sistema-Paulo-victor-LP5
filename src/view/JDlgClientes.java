@@ -5,6 +5,11 @@
  */
 package view;
 
+import java.util.Date;
+import javax.swing.JOptionPane;
+import tools.Util;
+import static tools.Util.mensagem;
+
 /**
  *
  * @author u04853004190
@@ -124,10 +129,10 @@ public class JDlgClientes extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirActionPerformed
-        if (pergunta("Tem certeza que deseja excluir este registro?")) {
-            mensagem("Registro excluído com sucesso!");
+        if (Util.pergunta("Tem certeza que deseja excluir este registro?")) {
+            Util.mensagem("Registro excluído com sucesso!");
         } else {
-            mensagem("Exclusão cancelada.");
+            Util.mensagem("Exclusão cancelada.");
         }
     }//GEN-LAST:event_jBtnExcluirActionPerformed
 
@@ -137,41 +142,41 @@ public class JDlgClientes extends javax.swing.JFrame {
     }//GEN-LAST:event_jBtnPesquisarActionPerformed
 
     private void jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarActionPerformed
-        Util.habilitar(false, jTxtNome, jTxtCodigo, jTxtApelido, jFmtCpf,
-            jCboNivel, jBtnCancelar, jBtnConfirmar,
-            jFmtDataDeNascimento, jChbAtivo, jPwfSenha);
-
-        Util.limpar(jTxtNome, jTxtCodigo, jTxtApelido, jFmtCpf,
-            jCboNivel, jBtnCancelar, jBtnConfirmar,
-            jFmtDataDeNascimento, jChbAtivo, jPwfSenha);
+//        Util.habilitar(false, jTxtNome, jTxtCodigo, jTxtApelido, jFmtCpf,
+//            jCboNivel, jBtnCancelar, jBtnConfirmar,
+//            jFmtDataDeNascimento, jChbAtivo, jPwfSenha);
+//
+//        Util.limpar(jTxtNome, jTxtCodigo, jTxtApelido, jFmtCpf,
+//            jCboNivel, jBtnCancelar, jBtnConfirmar,
+//            jFmtDataDeNascimento, jChbAtivo, jPwfSenha);
 
         Util.habilitar(true, jBtnAlterar, jBtnExcluir, jBtnIncluir, jBtnPesquisar);
     }//GEN-LAST:event_jBtnCancelarActionPerformed
 
     private void jBtnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIncluirActionPerformed
-        Util.habilitar(true, jTxtNome, jTxtCodigo, jTxtApelido, jFmtCpf,
-            jCboNivel, jBtnCancelar, jBtnConfirmar,
-            jFmtDataDeNascimento, jChbAtivo, jPwfSenha);
+//        Util.habilitar(true, jTxtNome, jTxtCodigo, jTxtApelido, jFmtCpf,
+//            jCboNivel, jBtnCancelar, jBtnConfirmar,
+//            jFmtDataDeNascimento, jChbAtivo, jPwfSenha);
         Util.habilitar(false, jBtnAlterar, jBtnExcluir, jBtnIncluir, jBtnPesquisar);
     }//GEN-LAST:event_jBtnIncluirActionPerformed
 
     private void jBtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarActionPerformed
-        Util.habilitar(true, jTxtNome, jTxtCodigo, jTxtApelido, jFmtCpf,
-            jCboNivel, jBtnCancelar, jBtnConfirmar,
-            jFmtDataDeNascimento, jChbAtivo, jPwfSenha);
+//        Util.habilitar(true, jTxtNome, jTxtCodigo, jTxtApelido, jFmtCpf,
+//            jCboNivel, jBtnCancelar, jBtnConfirmar,
+//            jFmtDataDeNascimento, jChbAtivo, jPwfSenha);
         Util.habilitar(false, jBtnAlterar, jBtnExcluir, jBtnIncluir, jBtnPesquisar);
     }//GEN-LAST:event_jBtnAlterarActionPerformed
 
     private void jBtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConfirmarActionPerformed
-        Date data = Util.strToDate(jFmtDataDeNascimento.getText());
-        String dataFormatada = Util.dateToStr(data);
+//        Date data = Util.strToDate(jFmtDataDeNascimento.getText());
+//        String dataFormatada = Util.dateToStr(data);
 
         mensagem("Data convertida: " + dataFormatada);
         mensagem("Usuário salvo com sucesso!");
 
-        Util.habilitar(false, jTxtNome, jTxtCodigo, jTxtApelido, jFmtCpf,
-            jCboNivel, jBtnCancelar, jBtnConfirmar,
-            jFmtDataDeNascimento, jChbAtivo, jPwfSenha);
+//        Util.habilitar(false, jTxtNome, jTxtCodigo, jTxtApelido, jFmtCpf,
+//            jCboNivel, jBtnCancelar, jBtnConfirmar,
+//            jFmtDataDeNascimento, jChbAtivo, jPwfSenha);
         Util.habilitar(true, jBtnAlterar, jBtnExcluir, jBtnIncluir, jBtnPesquisar);
     }//GEN-LAST:event_jBtnConfirmarActionPerformed
 
