@@ -5,17 +5,17 @@
  */
 package dao;
 
-import bean.Usuarios;
+import bean.Produtos;
 import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
 
 /**
- *
+ 
  * @author u04853004190
  */
-public class UsuariosDao extends AbstractDao {
+public class ProdutosDao extends AbstractDao {
 
     @Override
     public void insert(Object object) {
@@ -47,7 +47,7 @@ public class UsuariosDao extends AbstractDao {
     @Override
     public Object list(int codigo) {
         session.beginTransaction();
-        Criteria criteria = session.createCriteria(Usuarios.class);
+        Criteria criteria = session.createCriteria(Produtos.class);
         criteria.add(Restrictions.eq("idgrupo", codigo));
         List lista = criteria.list();
         session.getTransaction().commit();
@@ -57,7 +57,7 @@ public class UsuariosDao extends AbstractDao {
     @Override
     public ArrayList listAll() {
         session.beginTransaction();
-        Criteria criteria = session.createCriteria(Usuarios.class);
+        Criteria criteria = session.createCriteria(Produtos.class);
         List lista = criteria.list();
         session.getTransaction().commit();
         return (ArrayList) lista;
