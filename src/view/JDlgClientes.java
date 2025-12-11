@@ -349,7 +349,7 @@ public class JDlgClientes extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirActionPerformed
-        if (Util.pergunta("Tem certeza que deseja excluir este registro?")) {
+        if (Util.perguntar("Tem certeza que deseja excluir este registro?")) {
             Util.mensagem("Registro excluído com sucesso!");
         } else {
             Util.mensagem("Exclusão cancelada.");

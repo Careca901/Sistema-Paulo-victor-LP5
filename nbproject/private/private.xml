@@ -2,6 +2,19 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/Users/paulo/OneDrive/Documentos/Sistema-Paulo-victor-LP5/src/view/JDlgCompras.java</file>
+            <file>file:/C:/Users/paulo/OneDrive/Documentos/Sistema-Paulo-victor-LP5/src/view/ControllerProdutos.java</file>
+            <file>file:/C:/Users/paulo/OneDrive/Documentos/Sistema-Paulo-victor-LP5/src/view/ControllerUsuarios.java</file>
+            <file>file:/C:/Users/paulo/OneDrive/Documentos/Sistema-Paulo-victor-LP5/src/view/JDlgComprasProdutos.java</file>
+            <file>file:/C:/Users/paulo/OneDrive/Documentos/Sistema-Paulo-victor-LP5/src/view/ControllerComprasProdutos.java</file>
+            <file>file:/C:/Users/paulo/OneDrive/Documentos/Sistema-Paulo-victor-LP5/src/view/JDlgConsultaPedidos.java</file>
+            <file>file:/C:/Users/paulo/OneDrive/Documentos/Sistema-Paulo-victor-LP5/src/dao/ProdutosDao.java</file>
+            <file>file:/C:/Users/paulo/OneDrive/Documentos/Sistema-Paulo-victor-LP5/src/view/JDlgPedidosProdutos.java</file>
+            <file>file:/C:/Users/paulo/OneDrive/Documentos/Sistema-Paulo-victor-LP5/src/view/JFrmPrincipal.java</file>
+            <file>file:/C:/Users/paulo/OneDrive/Documentos/Sistema-Paulo-victor-LP5/src/view/JDlgConsultaProdutos.java</file>
+            <file>file:/C:/Users/paulo/OneDrive/Documentos/Sistema-Paulo-victor-LP5/src/view/JDlgConsultaClientes.java</file>
+            <file>file:/C:/Users/paulo/OneDrive/Documentos/Sistema-Paulo-victor-LP5/src/bean/ComprasProdutos.java</file>
+        </group>
     </open-files>
 </project-private>

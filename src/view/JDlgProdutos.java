@@ -5,9 +5,15 @@
  */
 package view;
 
+import bean.Produtos;
+import bean.Usuarios;
+import dao.ProdutosDao;
+import javax.swing.JFrame;
 import tools.Util;
+import static tools.Util.doubleToStr;
 import static tools.Util.mensagem;
-import static tools.Util.pergunta;
+import static tools.Util.perguntar;
+import static tools.Util.strToDouble;
 
 /**
  *
@@ -15,11 +21,49 @@ import static tools.Util.pergunta;
  */
 public class JDlgProdutos extends javax.swing.JFrame {
 
+    boolean incluir;
+
     /**
      * Creates new form JDlgProdutos
      */
     public JDlgProdutos() {
         initComponents();
+    }
+
+    JDlgProdutos(JFrame jFrame, boolean b) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public Produtos viewBean() {
+        Produtos produtos = new Produtos();
+        //usuarios.setIdusuarios(Util.strToInt( jTxtCodigo.getText() ));
+        int codigo = Util.strToInt(jTxtCodigo.getText());
+        produtos.setIdprodutos(codigo);
+        produtos.setNome(jTxtNome.getText());
+
+        produtos.setValorUnitario(Util.strToDouble(jFmtPreco.getText()));
+        if (jChbAtivo.isSelected() == true) {
+            produtos.setAtivo("S");
+        } else {
+            produtos.setAtivo("N");
+        }
+        return produtos;
+    }
+
+    public void beanView(Usuarios usuarios) {
+        jTxtCodigo.setText(Util.intToStr(usuarios.getIdusuarios()));
+        jTxtNome.setText(usuarios.getNome());
+//        jTxtApelido.setText(usuarios.getApelido());
+//        jFmtCpf.setText(usuarios.getCpf());
+//        jFmtDataDeNascimento.setText(Util.dateToStr(usuarios.getDataNascimento()));
+//        jPwfSenha.setText(usuarios.getSenha());
+//        jCboNivel.setSelectedIndex(usuarios.getNivel());
+        jChbAtivo.setSelected(usuarios.getAtivo().equals("S"));;
+        if (usuarios.getAtivo().equals("S") == true) {
+            jChbAtivo.setSelected(true);
+        } else {
+            jChbAtivo.setSelected(false);
+        }
     }
 
     /**
@@ -196,7 +240,7 @@ public class JDlgProdutos extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirActionPerformed
-        if (pergunta("Tem certeza que deseja excluir este registro?")) {
+        if (Util.perguntar("Tem certeza que deseja excluir este registro?")) {
             mensagem("Registro excluído com sucesso!");
         } else {
             mensagem("Exclusão cancelada.");
@@ -213,7 +257,7 @@ public class JDlgProdutos extends javax.swing.JFrame {
                 jBtnCancelar, jBtnConfirmar, jChbAtivo);
 
         Util.limpar(jTxtNome, jTxtCodigo,
-                 jBtnCancelar, jBtnConfirmar,
+                jBtnCancelar, jBtnConfirmar,
                 jChbAtivo);
 
         Util.habilitar(true, jBtnAlterar, jBtnExcluir, jBtnIncluir, jBtnPesquisar);
@@ -221,26 +265,31 @@ public class JDlgProdutos extends javax.swing.JFrame {
 
     private void jBtnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIncluirActionPerformed
         Util.habilitar(true, jTxtNome, jTxtCodigo,
-                 jBtnCancelar, jBtnConfirmar,
-                 jChbAtivo);
+                jBtnCancelar, jBtnConfirmar,
+                jChbAtivo);
         Util.habilitar(false, jBtnAlterar, jBtnExcluir, jBtnIncluir, jBtnPesquisar);
     }//GEN-LAST:event_jBtnIncluirActionPerformed
 
     private void jBtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarActionPerformed
         Util.habilitar(true, jTxtNome, jTxtCodigo,
-                 jBtnCancelar, jBtnConfirmar,
+                jBtnCancelar, jBtnConfirmar,
                 jChbAtivo);
         Util.habilitar(false, jBtnAlterar, jBtnExcluir, jBtnIncluir, jBtnPesquisar);
     }//GEN-LAST:event_jBtnAlterarActionPerformed
 
     private void jBtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConfirmarActionPerformed
-       
-       
-        mensagem("Usuário salvo com sucesso!");
+        ProdutosDao produtosDao = new ProdutosDao();
 
-        Util.habilitar(false, jTxtNome, jTxtCodigo
-                , jBtnCancelar, jBtnConfirmar,
-                 jChbAtivo );
+        if (incluir == true) {
+            produtosDao.insert(viewBean());
+
+            mensagem("Usuário salvo com sucesso!");
+        } else {
+            produtosDao.update(viewBean());
+        }
+        Util.habilitar(false, jTxtNome, jTxtCodigo,
+                 jBtnCancelar, jBtnConfirmar,
+                jChbAtivo);
         Util.habilitar(true, jBtnAlterar, jBtnExcluir, jBtnIncluir, jBtnPesquisar);
     }//GEN-LAST:event_jBtnConfirmarActionPerformed
 

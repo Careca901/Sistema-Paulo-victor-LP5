@@ -49,16 +49,9 @@ public class Util {
 
     }
 
-    public static boolean pergunta(String cad) {
-        int resposta = JOptionPane.showConfirmDialog(
-                null,
-                cad,
-                "Confirmação",
-                JOptionPane.YES_NO_OPTION,
-                JOptionPane.QUESTION_MESSAGE
-        );
-        return resposta == JOptionPane.YES_OPTION;
-
+     public static boolean perguntar(String cad) {
+        JOptionPane.showConfirmDialog(null, cad);
+        return true;
     }
 
     public static int strToInt(String num) {
@@ -69,16 +62,24 @@ public class Util {
         return String.valueOf(num);
     }
 
-    public static double strToDouble(String num) {
-        return 0.0;
+    public static String intToStr(int num) {
+        return String.valueOf(num);
     }
 
-    public static Integer doubleToStr(String num) {
-        try {
-            return Integer.valueOf(num);
-        } catch (NumberFormatException e) {
-            throw new NumberFormatException("Valor inválido: " + num);
-        }
+     public static double strToDouble(String num) {
+        return Double.parseDouble(num);
+    }
+
+//    public static Integer doubleToStr(String num) {
+//        try {
+//            return Integer.valueOf(num);
+//        } catch (NumberFormatException e) {
+//            throw new NumberFormatException("Valor inválido: " + num);
+//        }
+//    }
+
+    public static String doubleToStr(double num) {
+        return String.valueOf(num);
     }
 
     public static Date strToDate(String data) {
@@ -96,7 +97,6 @@ public class Util {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         return sdf.format(data);
     }
-
 
     public static boolean validarNumero(javax.swing.JTextField campo, String msg) {
         try {

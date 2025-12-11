@@ -5,12 +5,13 @@
  */
 package view;
 
-
+import bean.Usuarios;
+import dao.UsuariosDao;
 import java.util.Date;
 import javax.swing.JOptionPane;
 import tools.Util;
 import static tools.Util.mensagem;
-import static tools.Util.pergunta;
+import static tools.Util.perguntar;
 
 /**
  *
@@ -18,6 +19,8 @@ import static tools.Util.pergunta;
  */
 public class JDlgUsuarios extends javax.swing.JDialog {
 
+    boolean incluir;
+    
     public JDlgUsuarios(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -28,6 +31,42 @@ public class JDlgUsuarios extends javax.swing.JDialog {
                 jChbAtivo, jPwfSenha);
 
     }
+
+    public Usuarios viewBean() {
+        Usuarios usuarios = new Usuarios();
+        //usuarios.setIdusuarios(Util.strToInt( jTxtCodigo.getText() ));
+        int codigo = Util.strToInt(jTxtCodigo.getText());
+        usuarios.setIdusuarios(codigo);
+        usuarios.setNome(jTxtNome.getText());
+        usuarios.setApelido(jTxtApelido.getText());
+        usuarios.setCpf(jFmtCpf.getText());
+        usuarios.setDataNascimento(Util.strToDate(jFmtDataDeNascimento.getText()));
+        usuarios.setSenha(jPwfSenha.getText());
+        usuarios.setNivel(jCboNivel.getSelectedIndex());
+        if (jChbAtivo.isSelected() == true) {
+            usuarios.setAtivo("S");
+        } else {
+            usuarios.setAtivo("N");
+        }
+        return usuarios;
+    }
+
+    public void beanView(Usuarios usuarios) {
+        jTxtCodigo.setText(Util.intToStr(usuarios.getIdusuarios()));
+        jTxtNome.setText(usuarios.getNome());
+        jTxtApelido.setText(usuarios.getApelido());
+        jFmtCpf.setText(usuarios.getCpf());
+        jFmtDataDeNascimento.setText(Util.dateToStr(usuarios.getDataNascimento()));
+        jPwfSenha.setText(usuarios.getSenha());
+        jCboNivel.setSelectedIndex(usuarios.getNivel());
+        //jChbAtivo.setSelected(usuarios.getAtivo().equals("S"));
+        if (usuarios.getAtivo().equals("S") == true) {
+            jChbAtivo.setSelected(true);
+        } else {
+            jChbAtivo.setSelected(false);
+        }
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -240,40 +279,48 @@ public class JDlgUsuarios extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBtnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIncluirActionPerformed
-    Util.habilitar(true, jTxtNome, jTxtCodigo, jTxtApelido, jFmtCpf,
+        Util.habilitar(true, jTxtNome, jTxtCodigo, jTxtApelido, jFmtCpf,
                 jCboNivel, jBtnCancelar, jBtnConfirmar,
                 jFmtDataDeNascimento, jChbAtivo, jPwfSenha);
         Util.habilitar(false, jBtnAlterar, jBtnExcluir, jBtnIncluir, jBtnPesquisar);
-   
+
     }//GEN-LAST:event_jBtnIncluirActionPerformed
 
     private void jBtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarActionPerformed
-     Util.habilitar(true, jTxtNome, jTxtCodigo, jTxtApelido, jFmtCpf,
+        Util.habilitar(true, jTxtNome, jTxtCodigo, jTxtApelido, jFmtCpf,
                 jCboNivel, jBtnCancelar, jBtnConfirmar,
                 jFmtDataDeNascimento, jChbAtivo, jPwfSenha);
         Util.habilitar(false, jBtnAlterar, jBtnExcluir, jBtnIncluir, jBtnPesquisar);
-    
+
     }//GEN-LAST:event_jBtnAlterarActionPerformed
 
     private void jBtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConfirmarActionPerformed
-       Date data = Util.strToDate(jFmtDataDeNascimento.getText());
+        Date data = Util.strToDate(jFmtDataDeNascimento.getText());
         String dataFormatada = Util.dateToStr(data);
 
         mensagem("Data convertida: " + dataFormatada);
-        mensagem("Usuário salvo com sucesso!");
+
+        UsuariosDao usuariosDao = new UsuariosDao();
+        
+        if (incluir == true) {
+            usuariosDao.insert(viewBean());
+
+            mensagem("Usuário salvo com sucesso!");
+        } else {
+            usuariosDao.update(viewBean());
+        }
 
         Util.habilitar(false, jTxtNome, jTxtCodigo, jTxtApelido, jFmtCpf,
                 jCboNivel, jBtnCancelar, jBtnConfirmar,
                 jFmtDataDeNascimento, jChbAtivo, jPwfSenha);
         Util.habilitar(true, jBtnAlterar, jBtnExcluir, jBtnIncluir, jBtnPesquisar);
-    
+
     }//GEN-LAST:event_jBtnConfirmarActionPerformed
 
     private void jBtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirActionPerformed
-    if (pergunta("Tem certeza que deseja excluir este registro?")) {
-            mensagem("Registro excluído com sucesso!");
-        } else {
-            mensagem("Exclusão cancelada.");
+       if (Util.perguntar("Deseja Excluir?") == true) {
+            UsuariosDao usuariosDao = new UsuariosDao();
+            usuariosDao.delete(viewBean());
         }
     }//GEN-LAST:event_jBtnExcluirActionPerformed
 
@@ -283,7 +330,7 @@ public class JDlgUsuarios extends javax.swing.JDialog {
     }//GEN-LAST:event_jBtnPesquisarActionPerformed
 
     private void jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarActionPerformed
-   Util.habilitar(false, jTxtNome, jTxtCodigo, jTxtApelido, jFmtCpf,
+        Util.habilitar(false, jTxtNome, jTxtCodigo, jTxtApelido, jFmtCpf,
                 jCboNivel, jBtnCancelar, jBtnConfirmar,
                 jFmtDataDeNascimento, jChbAtivo, jPwfSenha);
 
@@ -295,7 +342,7 @@ public class JDlgUsuarios extends javax.swing.JDialog {
     }//GEN-LAST:event_jBtnCancelarActionPerformed
 
     private void jTxtCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTxtCodigoActionPerformed
-  try {
+        try {
             int codigo = Util.strToInt(jTxtCodigo.getText());
             System.out.println("Código digitado: " + codigo);
         } catch (NumberFormatException e) {
@@ -309,7 +356,7 @@ public class JDlgUsuarios extends javax.swing.JDialog {
     }//GEN-LAST:event_jTxtCodigoActionPerformed
 
     private void jFmtCpfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFmtCpfActionPerformed
- try {
+        try {
             int cpf = Util.strToInt(jFmtCpf.getText());
             System.out.println("CPF digitado: " + cpf);
         } catch (NumberFormatException e) {
@@ -325,10 +372,10 @@ public class JDlgUsuarios extends javax.swing.JDialog {
     /**
      * @param args the command line arguments
      */
-  public static void main(String args[]) {
+    public static void main(String args[]) {
         try {
-            for (javax.swing.UIManager.LookAndFeelInfo info :
-                    javax.swing.UIManager.getInstalledLookAndFeels()) {
+            for (javax.swing.UIManager.LookAndFeelInfo info
+                    : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;

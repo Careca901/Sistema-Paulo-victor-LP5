@@ -9,7 +9,7 @@ import java.util.Date;
 import javax.swing.JOptionPane;
 import tools.Util;
 import static tools.Util.mensagem;
-import static tools.Util.pergunta;
+import static tools.Util.perguntar;
 
 /**
  *
@@ -232,7 +232,7 @@ public class JDlgVendedor extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirActionPerformed
-        if (pergunta("Tem certeza que deseja excluir este registro?")) {
+        if (perguntar("Tem certeza que deseja excluir este registro?")) {
             mensagem("Registro excluído com sucesso!");
         } else {
             mensagem("Exclusão cancelada.");

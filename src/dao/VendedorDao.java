@@ -6,21 +6,19 @@
 package dao;
 
 import bean.Vendedor;
-import java.util.ArrayList;
+import bean.Usuarios;
 import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
 
 /**
  *
- * @author u04853004190
+ * @author u1845853
  */
 public class VendedorDao extends AbstractDao {
 
     @Override
     public void insert(Object object) {
-        session.flush();
-        session.clear();
         session.beginTransaction();
         session.save(object);
         session.getTransaction().commit();
@@ -28,18 +26,18 @@ public class VendedorDao extends AbstractDao {
 
     @Override
     public void update(Object object) {
+        session.beginTransaction();
         session.flush();
         session.clear();
-        session.beginTransaction();
         session.update(object);
         session.getTransaction().commit();
     }
 
     @Override
     public void delete(Object object) {
+        session.beginTransaction();
         session.flush();
         session.clear();
-        session.beginTransaction();
         session.delete(object);
         session.getTransaction().commit();
     }
@@ -48,19 +46,20 @@ public class VendedorDao extends AbstractDao {
     public Object list(int codigo) {
         session.beginTransaction();
         Criteria criteria = session.createCriteria(Vendedor.class);
-        criteria.add(Restrictions.eq("idgrupo", codigo));
+        criteria.add(Restrictions.eq("idvendedor", codigo) );
         List lista = criteria.list();
         session.getTransaction().commit();
-        return lista.get(0);
+        return lista;
     }
 
     @Override
-    public ArrayList listAll() {
+    public Object listAll() {
         session.beginTransaction();
         Criteria criteria = session.createCriteria(Vendedor.class);
         List lista = criteria.list();
         session.getTransaction().commit();
-        return (ArrayList) lista;
+        return lista;
     }
+
 
 }
